@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.wei.sample">
 
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
+
     <application
         android:allowBackup="true"
         android:fullBackupContent="true"
@@ -11,6 +14,16 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
+        <meta-data
+            android:name="xposedmodule"
+            android:value="true" />
+        <meta-data
+            android:name="xposeddescription"
+            android:value="hello xposed" />
+        <meta-data
+            android:name="xposedminversion"
+            android:value="54" />
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -19,6 +32,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".handler.HandlerActivity" />
+        <activity android:name=".rxjava.RxJavaActivity" />
+        <activity android:name=".xposed.XposedActivity" />
+        <activity android:name=".floatbtn.FloatButtonActivity" />
+
+        <service android:name=".floatbtn.FloatWindowService" />
     </application>
 
 </manifest>
