@@ -25,6 +25,7 @@ class HandlerActivity : Callback3, AppCompatActivity() {
 
     private var textView: TextView? = null
 
+    private val callbackList = ArrayList<Callback3>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,28 +40,31 @@ class HandlerActivity : Callback3, AppCompatActivity() {
             }
 
             override fun callback(msg: String?) {
+                println("shuxin.wei callback:" + Thread.currentThread().name)
                 textView?.text = msg
             }
-
         }
 
-        val handler = object : Handler() {
-            override fun handleMessage(msg: Message?) {
-                textView?.text = msg?.obj.toString()
-            }
-        }
 
         object : Thread() {
             override fun run() {
-                sleep(1000)
-                val msg = Message.obtain()
-                msg.obj= "salkjdflkajfakdjfadfljadf"
-                handler.handleMessage(msg)
-//                callback?.callback("laskjdlkfajsldkfjalkjdflkaskldflasjkldskljfdskjldsljdsafjkl")
+                if (callback != null) {
+                    callbackList.add(callback)
+                }
+                println("shuxin.wei run:" + Thread.currentThread().name)
+
+                val handler = object : Handler() {
+                    override fun handleMessage(msg: Message?) {
+                        super.handleMessage(msg)
+                    }
+                }
+
+                handler.sendMessage(Message.obtain().apply {
+                    obj = ""
+                })
+
             }
         }.start()
     }
-
-
 }
 
