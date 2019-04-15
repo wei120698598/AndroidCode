@@ -36,6 +36,7 @@
         <activity android:name=".rxjava.RxJavaActivity" />
         <activity android:name=".xposed.XposedActivity" />
         <activity android:name=".floatbtn.FloatButtonActivity" />
+        <activity android:name=".recyclerview.RecyclerViewActivity" />
 
         <service android:name=".floatbtn.FloatWindowService" />
     </application>

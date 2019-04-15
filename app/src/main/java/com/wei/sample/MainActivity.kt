@@ -10,6 +10,7 @@ import android.widget.Toast
 import com.wei.sample.floatbtn.FloatButtonActivity
 import com.wei.sample.floatbtn.FloatToast
 import com.wei.sample.handler.HandlerActivity
+import com.wei.sample.recyclerview.RecyclerViewActivity
 import com.wei.sample.rxjava.RxJavaActivity
 import com.wei.sample.xposed.XposedActivity
 import java.io.BufferedReader
@@ -23,7 +24,7 @@ class MainActivity : ListActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val itemList = Arrays.asList("Handler", "RxJava", "检查root", "Xposed", "悬浮窗")
+        val itemList = Arrays.asList("Handler", "RxJava", "检查root", "Xposed", "悬浮窗", "RecyclerView")
         listAdapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1, itemList)
     }
 
@@ -34,6 +35,7 @@ class MainActivity : ListActivity() {
             2 -> Toast.makeText(this, "root权限:" + checkRoot(), Toast.LENGTH_SHORT).show()
             3 -> startActivity(Intent(this, XposedActivity::class.java))
             4 -> FloatToast(this)
+            5 -> startActivity(Intent(this, RecyclerViewActivity::class.java))
         }
     }
 

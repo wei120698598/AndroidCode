@@ -1,0 +1,43 @@
+task test1() {
+    dependsOn("test2")
+    println("test1: 1")
+
+
+
+    doFirst {
+        println("test1: 2")
+    }
+
+    doLast {
+        println("test1: 3")
+    }
+
+
+    doLast {
+        println("test1: 4")
+    }
+}
+
+
+task test2() {
+    dependsOn(assemble)
+    println("test2: 1")
+
+
+
+    doFirst {
+        println("test2: 2")
+    }
+
+
+    doLast {
+        println("test2: 3")
+    }
+
+    println("getBuildDir: " + getBuildDir().absolutePath)
+    println("getBuildFile: " + getBuildFile().absolutePath)
+}
+
+tasks.whenTaskAdded { it ->
+//    println("taskName:" + it.name)
+}
