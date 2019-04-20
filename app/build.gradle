@@ -5,6 +5,9 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 apply from: "../test.gradle"
+apply plugin: 'kotlin-kapt'
+apply plugin: 'androidx.navigation.safeargs.kotlin'
+//apply plugin: 'com.ceabie.dexnkife'
 android {
     compileSdkVersion 28
     defaultConfig {
@@ -15,6 +18,9 @@ android {
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
+        multiDexEnabled true
+
+
         javaCompileOptions {
             annotationProcessorOptions {
                 arguments = [AROUTER_MODULE_NAME: project.getName()]
@@ -22,15 +28,14 @@ android {
         }
     }
     buildTypes {
+        debug {}
         release {
-            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
 
         releaseTest {
-            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            matchingFallbacks = ['release']
+            matchingFallbacks = ['debug']
         }
     }
 
@@ -38,7 +43,6 @@ android {
     applicationVariants.all { variant ->
         println("variant.name： " + variant.name)
         println("variant.buildType： " + variant.buildType.name)
-
     }
 
 
@@ -55,22 +59,47 @@ android {
 //        }
 //    }
 
+    dexOptions {
+        preDexLibraries = false
+        additionalParameters += '--set-max-idx-number=40000'
+        additionalParameters += '--multi-dex'
+        additionalParameters += "--main-dex-list=$projectDir/maindexList.txt"
+        additionalParameters += '--minimal-main-dex'
+    }
 
 }
 
-
 dependencies {
     compileOnly fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.21"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.30"
     testImplementation 'junit:junit:4.12'
-    //androidx
+    // ------------- androidx -------------
+    kapt "androidx.room:room-compiler:2.0.0"
     implementation 'androidx.appcompat:appcompat:1.1.0-alpha04'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     implementation 'androidx.recyclerview:recyclerview:1.1.0-alpha04'
     implementation 'androidx.core:core-ktx:1.1.0-alpha05'
+    implementation "androidx.appcompat:appcompat:$rootProject.supportLibraryVersion"
+    implementation "androidx.constraintlayout:constraintlayout:$rootProject.constraintLayoutVersion"
+    implementation "androidx.core:core-ktx:$rootProject.ktxVersion"
+    implementation "androidx.lifecycle:lifecycle-extensions:$rootProject.lifecycleVersion"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$rootProject.lifecycleVersion"
+    implementation "androidx.navigation:navigation-fragment-ktx:$rootProject.navigationVersion"
+    implementation "androidx.navigation:navigation-ui-ktx:$rootProject.navigationVersion"
+    implementation "androidx.recyclerview:recyclerview:$rootProject.recyclerViewVersion"
+    implementation "androidx.room:room-runtime:$rootProject.roomVersion"
+    implementation "androidx.work:work-runtime-ktx:$rootProject.workVersion"
+
+    // ------------- Testing dependencies -------------
+    androidTestImplementation "androidx.arch.core:core-testing:$rootProject.coreTestingVersion"
+    androidTestImplementation "androidx.test.espresso:espresso-contrib:$rootProject.espressoVersion"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$rootProject.espressoVersion"
+    androidTestImplementation "androidx.test.espresso:espresso-intents:$rootProject.espressoVersion"
+    androidTestImplementation "androidx.test.uiautomator:uiautomator:$rootProject.uiAutomatorVersion"
+    testImplementation "junit:junit:$rootProject.junitVersion"
+
     implementation 'com.google.android.material:material:1.1.0-alpha05'
-    androidTestImplementation 'androidx.test:runner:1.2.0-alpha03'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0-alpha03'
+
 
     // ------------- RxAndroid -------------
     implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
@@ -87,7 +116,7 @@ dependencies {
     implementation "com.github.markzhai:blockcanary-android:1.5.0"
 
     // ------------- 图片加载 -------------
-    implementation 'com.github.bumptech.glide:glide:4.4.0'
+    implementation 'com.github.bumptech.glide:glide:4.9.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.4.0'
 
     // ------------- 通信 -------------
@@ -99,7 +128,19 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
     implementation 'com.squareup.okhttp3:logging-interceptor:3.12.0'
 
+    // ------------- hook框架 -------------
     compileOnly 'de.robv.android.xposed:api:82'
 
-    implementation project(':library')
+    // ------------- 腾讯webview加速 -------------
+    implementation 'com.tencent.sonic:sdk:3.1.0'
+
+    //
+    implementation "org.jetbrains.anko:anko:0.10.8"
+
+    // ------------- multidex 分包 -------------
+    implementation 'com.android.support:multidex:1.0.3'
+    androidTestImplementation 'com.android.support:multidex-instrumentation:1.0.3'
+
+//    implementation project(':library')
+
 }

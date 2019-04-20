@@ -28,23 +28,24 @@ import androidx.recyclerview.widget.RecyclerView;
  */
 public class RecyclerViewActivity extends AppCompatActivity {
 
-    private RecyclerView recyclerView;
-    private RecyclerViewAdapter adapter;
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recyclerview);
 
         getSupportActionBar().setTitle("RecyclerView");
-        recyclerView = findViewById(R.id.recyclerView);
+        RecyclerView recyclerView = findViewById(R.id.recyclerView);
 
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
+        initRecyclerView(recyclerView);
+    }
+
+    public static void initRecyclerView(RecyclerView recyclerView) {
+        LinearLayoutManager layoutManager = new LinearLayoutManager(recyclerView.getContext(), RecyclerView.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
-        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
-        dividerItemDecoration.setDrawable(getResources().getDrawable(android.R.drawable.divider_horizontal_textfield));
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL);
+        dividerItemDecoration.setDrawable(recyclerView.getContext().getResources().getDrawable(android.R.drawable.divider_horizontal_textfield));
         recyclerView.addItemDecoration(dividerItemDecoration);
-        adapter = new RecyclerViewAdapter();
+        RecyclerViewAdapter adapter = new RecyclerViewAdapter();
         ArrayList<String> data = new ArrayList<>();
         for (int i = 0; i < 60; i++) {
             data.add("item " + i);
@@ -65,8 +66,7 @@ public class RecyclerViewActivity extends AppCompatActivity {
         @NonNull
         @Override
         public TestViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            //
-            View contentView = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_item_recyclerview, parent);
+            View contentView = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_item_recyclerview, parent,false);
             return new TestViewHolder(contentView);
         }
 
