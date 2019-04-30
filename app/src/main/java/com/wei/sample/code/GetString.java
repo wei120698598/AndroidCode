@@ -58,9 +58,9 @@ public class GetString {
     }
 
     public static void main(String[] args) {
-        new GetString().generatePWD();
+//        new GetString().generatePWD();
         count = 0;
-//        new GetString().generateText(0);
+        new GetString().generateText(0);
 //        System.out.println("" + count);
     }
 }

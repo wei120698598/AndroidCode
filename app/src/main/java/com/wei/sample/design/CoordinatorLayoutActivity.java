@@ -8,10 +8,8 @@ package com.wei.sample.design;
  * @email weishuxin@icourt.cc
  */
 
-import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,12 +17,9 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.fragment.app.ListFragment;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
@@ -59,21 +54,22 @@ public class CoordinatorLayoutActivity extends AppCompatActivity {
 //        });
 
 
-        ViewPager viewpager =  findViewById(R.id.viewpager);
-        MyAdapter adapter = new MyAdapter(getSupportFragmentManager(), Arrays.asList(new Fragment1(), new Fragment2(), new Fragment3()), new String[]{"主页", "销售", "我的"});
-        viewpager.setAdapter(adapter);
-
-        TabLayout mTablayout =  findViewById(R.id.mTable);
-        mTablayout.setupWithViewPager(viewpager);
+//        ViewPager viewpager =  findViewById(R.id.viewpager);
+//        MyAdapter adapter = new MyAdapter(getSupportFragmentManager(), Arrays.asList(new Fragment1(), new Fragment2(), new Fragment3()), new String[]{"主页", "销售", "我的"});
+//        viewpager.setAdapter(adapter);
+//
+//        TabLayout mTablayout =  findViewById(R.id.mTable);
+//        mTablayout.setupWithViewPager(viewpager);
 
         Hashtable<Object, Object> objectObjectHashtable = new Hashtable<>();
 
         //使用CollapsingToolbarLayout必须把title设置到CollapsingToolbarLayout上，设置到Toolbar上则不会显示
-        CollapsingToolbarLayout mCollapsingToolbarLayout = findViewById(R.id.collapsing_toolbar_layout);
-        mCollapsingToolbarLayout.setTitle("CollapsingToolbarLayout");
+//        CollapsingToolbarLayout mCollapsingToolbarLayout = findViewById(R.id.collapsing_toolbar_layout);
+//        mCollapsingToolbarLayout.setTitle("CollapsingToolbarLayout");
         //通过CollapsingToolbarLayout修改字体颜色
-        mCollapsingToolbarLayout.setExpandedTitleColor(Color.WHITE);//设置还没收缩时状态下字体颜色
-        mCollapsingToolbarLayout.setCollapsedTitleTextColor(Color.GREEN);//设置收缩后Toolbar上字体的颜色
+//        mCollapsingToolbarLayout.setExpandedTitleColor(Color.WHITE);//设置还没收缩时状态下字体颜色
+//        mCollapsingToolbarLayout.setCollapsedTitleTextColor(Color.GREEN);//设置收缩后Toolbar上字体的颜色
+        RecyclerViewActivity.initRecyclerView((RecyclerView) findViewById(R.id.recyclerView));
 
 
     }

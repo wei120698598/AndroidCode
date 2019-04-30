@@ -2,22 +2,23 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
 
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/mAppbarLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="200dp"
         android:fitsSystemWindows="true">
 
-        <com.google.android.material.appbar.CollapsingToolbarLayout
-            android:id="@+id/collapsing_toolbar_layout"
-            android:layout_width="match_parent"
-            android:layout_height="250dp"
-            android:fitsSystemWindows="true"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+        <!--<com.google.android.material.appbar.CollapsingToolbarLayout-->
+            <!--android:id="@+id/collapsing_toolbar_layout"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--app:contentScrim="?attr/colorPrimary"-->
+            <!--android:fitsSystemWindows="true"-->
+            <!--app:layout_scrollFlags="scroll|exitUntilCollapsed">-->
 
             <ImageView
                 android:layout_width="match_parent"
@@ -28,13 +29,13 @@
                 app:layout_collapseParallaxMultiplier="0.7" />
 
 
-            <!--<androidx.appcompat.widget.Toolbar-->
-                <!--android:id="@+id/toolbar"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="?attr/actionBarSize"-->
-                <!--app:layout_collapseMode="parallax" />-->
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_collapseMode="pin" />
 
-        </com.google.android.material.appbar.CollapsingToolbarLayout>
+        <!--</com.google.android.material.appbar.CollapsingToolbarLayout>-->
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/mTable"
@@ -42,22 +43,30 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:fitsSystemWindows="true" />
-        <androidx.viewpager.widget.ViewPager
-            android:id="@+id/viewpager"
-            android:layout_width="match_parent"
-            android:fitsSystemWindows="true"
-            android:layout_height="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+
     </com.google.android.material.appbar.AppBarLayout>
 
-    <TextView
-        android:id="@+id/title"
+    <!--<androidx.viewpager.widget.ViewPager-->
+    <!--android:id="@+id/viewpager"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:fitsSystemWindows="true"-->
+    <!--app:layout_behavior="@string/appbar_scrolling_view_behavior" />-->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="#ff0000"
-        android:gravity="center"
-        android:text="Hello World"
-        android:textColor="#ffffff"
-        android:textSize="18sp"
-        app:layout_behavior="@string/behavior_sample_title" />
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+    <!--<TextView-->
+    <!--android:id="@+id/title"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="50dp"-->
+    <!--android:background="#ff0000"-->
+    <!--android:gravity="center"-->
+    <!--android:text="Hello World"-->
+    <!--android:textColor="#ffffff"-->
+    <!--android:textSize="18sp"-->
+    <!--app:layout_behavior="@string/behavior_sample_title" />-->
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

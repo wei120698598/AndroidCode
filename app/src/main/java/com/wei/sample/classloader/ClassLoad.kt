@@ -1,9 +1,5 @@
 package com.wei.sample.classloader
 
-import android.os.Message
-
-import java.util.logging.Handler
-
 /**
  * @author shuxin.wei
  * @version v1.0.0
@@ -23,13 +19,25 @@ import java.util.logging.Handler
  * @email weishuxin@icourt.cc
  */
 internal open class ClassLoaderA {
+    init {
+        print("2")
+    }
 
     init {
         print("3")
     }
 
-    init {
-        print("2")
+
+    constructor() {
+        print("5")
+    }
+
+    constructor(name: String) : this() {
+        print("6")
+    }
+
+    constructor(name: String, id: String) {
+        print("7")
     }
 
     open fun print() {
@@ -43,14 +51,13 @@ internal open class ClassLoaderA {
     }
 }
 
-internal class ClassLoaderB : ClassLoaderA() {
-
+internal class ClassLoaderB : ClassLoaderA("s") {
     init {
-        print("c")
+        print("b")
     }
 
     init {
-        print("b")
+        print("c")
     }
 
     override fun print() {
@@ -69,10 +76,7 @@ object Hello {
     fun main(args: Array<String>) {
         var classLoaderB: ClassLoaderA = ClassLoaderB()
         classLoaderB.print()
+        println()
         classLoaderB = ClassLoaderB()
-
-        object : android.os.Handler(Callback { false }) {
-            override fun handleMessage(msg: Message) {}
-        }.sendEmptyMessage(0)
     }
 }

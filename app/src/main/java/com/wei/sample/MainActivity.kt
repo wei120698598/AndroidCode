@@ -29,6 +29,10 @@ class MainActivity : ListActivity() {
         listAdapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1, itemList)
     }
 
+    override fun onStart() {
+        super.onStart()
+    }
+
     override fun onListItemClick(l: ListView?, v: View?, position: Int, id: Long) {
         when (position) {
             0 -> startActivity(Intent(this, HandlerActivity::class.java))

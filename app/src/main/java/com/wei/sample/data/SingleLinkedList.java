@@ -148,5 +148,6 @@ class Test {
         singleLinkedList.reverseList();
         singleLinkedList.printList();
 //        System.out.println(singleLinkedList.find("0"));
+        System.gc();
     }
 }
