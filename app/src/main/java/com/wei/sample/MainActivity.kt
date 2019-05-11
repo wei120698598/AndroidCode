@@ -11,6 +11,7 @@ import com.wei.sample.design.CoordinatorLayoutActivity
 import com.wei.sample.floatbtn.FloatButtonActivity
 import com.wei.sample.floatbtn.FloatToast
 import com.wei.sample.handler.HandlerActivity
+import com.wei.sample.mvvm.TaskActivity
 import com.wei.sample.recyclerview.RecyclerViewActivity
 import com.wei.sample.rxjava.RxJavaActivity
 import com.wei.sample.xposed.XposedActivity
@@ -25,7 +26,7 @@ class MainActivity : ListActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val itemList = Arrays.asList("Handler", "RxJava", "检查root", "Xposed", "悬浮窗", "RecyclerView","Coordinator")
+        val itemList = Arrays.asList("Handler", "RxJava", "检查root", "Xposed", "悬浮窗", "RecyclerView","Coordinator","MVVM")
         listAdapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1, itemList)
     }
 
@@ -42,6 +43,7 @@ class MainActivity : ListActivity() {
             4 -> FloatToast(this)
             5 -> startActivity(Intent(this, RecyclerViewActivity::class.java))
             6 -> startActivity(Intent(this, CoordinatorLayoutActivity::class.java))
+            7 -> startActivity(Intent(this, TaskActivity::class.java))
         }
     }
 

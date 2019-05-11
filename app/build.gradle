@@ -78,30 +78,30 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     // ------------- androidx -------------
     kapt "androidx.room:room-compiler:2.0.0"
-    implementation 'androidx.appcompat:appcompat:1.1.0-alpha04'
+    implementation 'androidx.appcompat:appcompat:1.1.0-alpha05'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
-    implementation 'androidx.recyclerview:recyclerview:1.1.0-alpha04'
-    implementation 'androidx.core:core-ktx:1.1.0-alpha05'
-    implementation "androidx.appcompat:appcompat:$rootProject.supportLibraryVersion"
-    implementation "androidx.constraintlayout:constraintlayout:$rootProject.constraintLayoutVersion"
-    implementation "androidx.core:core-ktx:$rootProject.ktxVersion"
-    implementation "androidx.lifecycle:lifecycle-extensions:$rootProject.lifecycleVersion"
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$rootProject.lifecycleVersion"
-    implementation "androidx.navigation:navigation-fragment-ktx:$rootProject.navigationVersion"
-    implementation "androidx.navigation:navigation-ui-ktx:$rootProject.navigationVersion"
-    implementation "androidx.recyclerview:recyclerview:$rootProject.recyclerViewVersion"
-    implementation "androidx.room:room-runtime:$rootProject.roomVersion"
-    implementation "androidx.work:work-runtime-ktx:$rootProject.workVersion"
+    implementation 'androidx.recyclerview:recyclerview:1.1.0-alpha05'
+    implementation 'androidx.core:core-ktx:1.2.0-alpha01'
+    implementation "androidx.appcompat:appcompat:1.0.2"
+    implementation "androidx.constraintlayout:constraintlayout:2.0.0-beta1"
+    implementation "androidx.core:core-ktx:1.0.2"
+    implementation "androidx.lifecycle:lifecycle-extensions:2.0.0"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0-alpha01"
+    implementation "androidx.navigation:navigation-fragment-ktx:2.0.0"
+    implementation "androidx.navigation:navigation-ui-ktx:2.0.0"
+    implementation "androidx.recyclerview:recyclerview:1.1.0-alpha05"
+    implementation "androidx.room:room-runtime:2.1.0-beta01"
+    implementation "androidx.work:work-runtime-ktx:2.0.1"
 
     // ------------- Testing dependencies -------------
-    androidTestImplementation "androidx.arch.core:core-testing:$rootProject.coreTestingVersion"
-    androidTestImplementation "androidx.test.espresso:espresso-contrib:$rootProject.espressoVersion"
-    androidTestImplementation "androidx.test.espresso:espresso-core:$rootProject.espressoVersion"
-    androidTestImplementation "androidx.test.espresso:espresso-intents:$rootProject.espressoVersion"
-    androidTestImplementation "androidx.test.uiautomator:uiautomator:$rootProject.uiAutomatorVersion"
-    testImplementation "junit:junit:$rootProject.junitVersion"
+    androidTestImplementation "androidx.arch.core:core-testing:2.0.1"
+    androidTestImplementation "androidx.test.espresso:espresso-contrib:3.1.1"
+    androidTestImplementation "androidx.test.espresso:espresso-core:3.1.1"
+    androidTestImplementation "androidx.test.espresso:espresso-intents:3.1.1"
+    androidTestImplementation "androidx.test.uiautomator:uiautomator:2.2.0"
+    testImplementation "junit:junit:4.12"
 
-    implementation 'com.google.android.material:material:1.1.0-alpha05'
+    implementation 'com.google.android.material:material:1.1.0-alpha06'
 
 
     // ------------- RxAndroid -------------
@@ -146,4 +146,20 @@ dependencies {
 
 //    implementation project(':library')
 
+    // -------------- Litho ------------------
+    implementation 'com.facebook.litho:litho-core:0.25.0'
+    implementation 'com.facebook.litho:litho-widget:0.25.0'
+    kapt 'com.facebook.litho:litho-processor:0.25.0'
+    // SoLoader
+    implementation 'com.facebook.soloader:soloader:0.6.0'
+    // For integration with Fresco
+    implementation 'com.facebook.litho:litho-fresco:0.25.0'
+    // For testing
+    testImplementation 'com.facebook.litho:litho-testing:0.25.0'
+
+    // Sections
+    implementation 'com.facebook.litho:litho-sections-core:0.25.0'
+    implementation 'com.facebook.litho:litho-sections-widget:0.25.0'
+    compileOnly 'com.facebook.litho:litho-sections-annotations:0.25.0'
+    kapt 'com.facebook.litho:litho-sections-processor:0.25.0'
 }
