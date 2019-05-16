@@ -42,6 +42,7 @@
             android:name=".design.CoordinatorLayoutActivity"
             android:theme="@style/Theme.Design.Light.NoActionBar" />
         <activity android:name=".mvvm.TaskActivity" />
+        <activity android:name=".thread.ThreadActivity" />
 
         <service android:name=".floatbtn.FloatWindowService" />
     </application>

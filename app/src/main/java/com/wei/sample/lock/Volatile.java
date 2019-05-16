@@ -11,7 +11,13 @@ public class Volatile {
     public volatile int inc = 0;
 
     public void increase() {
-        inc++;
+        try {
+            String name = "asdf";
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            System.out.println("哈哈");
+        }
     }
 
     public static void main(String[] args) {
@@ -30,5 +36,16 @@ public class Volatile {
             Thread.yield();
         }
         System.out.println("" + test.inc);
+    }
+
+
+    public static void testTry() {
+        try {
+            String name = "asdf";
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            System.out.println("哈哈");
+        }
     }
 }

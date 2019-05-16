@@ -28,6 +28,7 @@ import com.google.android.material.tabs.TabLayout;
 import com.wei.sample.R;
 import com.wei.sample.recyclerview.RecyclerViewActivity;
 
+import java.net.Socket;
 import java.util.Arrays;
 import java.util.Hashtable;
 import java.util.List;
@@ -71,7 +72,7 @@ public class CoordinatorLayoutActivity extends AppCompatActivity {
 //        mCollapsingToolbarLayout.setCollapsedTitleTextColor(Color.GREEN);//设置收缩后Toolbar上字体的颜色
         RecyclerViewActivity.initRecyclerView((RecyclerView) findViewById(R.id.recyclerView));
 
-
+        Socket socket = new Socket();
     }
 
     public static class Fragment1 extends Fragment {

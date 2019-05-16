@@ -7,11 +7,9 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModel;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
-import com.wei.sample.MyApplication;
+import com.bumptech.glide.Glide;
 
 /**
  * @author shuxin.wei
@@ -28,16 +26,15 @@ public class TaskActivity extends AppCompatActivity {
         textView.setLayoutParams(new LinearLayout.LayoutParams(-1, -1));
         textView.setText("Hello Word");
         setContentView(textView);
-//        TaskViewModel taskViewModel = ViewModelProviders.of(this).get(TaskViewModel.class);
+        TaskViewModel taskViewModel = ViewModelProviders.of(this).get(TaskViewModel.class);
 //        TaskViewModel taskViewModel = new ViewModelProvider.AndroidViewModelFactory(MyApplication.getInstance()).create(TaskViewModel.class);
-        TaskViewModel taskViewModel = new ViewModelProvider(this, new ViewModelProvider.AndroidViewModelFactory(MyApplication.getInstance())).get(TaskViewModel.class);
+//        TaskViewModel taskViewModel = new ViewModelProvider(this, new ViewModelProvider.AndroidViewModelFactory(MyApplication.getInstance())).get(TaskViewModel.class);
         taskViewModel.getString().observe(this, new Observer<String>() {
             @Override
             public void onChanged(String s) {
                 textView.setText(s);
             }
         });
-
 
         taskViewModel.getData();
     }
