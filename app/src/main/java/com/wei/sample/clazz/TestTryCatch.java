@@ -1,5 +1,9 @@
 package com.wei.sample.clazz;
 
+import java.util.Arrays;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 /**
  * @author shuxin.wei
  * @version v1.0.0
@@ -46,6 +50,14 @@ public class TestTryCatch {
     }
 
     public String main(String[] args) {
+        ExecutorService executorService = Executors.newSingleThreadExecutor();
+        executorService.submit(new Runnable() {
+            @Override
+            public void run() {
+
+            }
+        });
+
         try {
             staticMethod();
             syncBlock();

@@ -1,4 +1,4 @@
-package com.wei.sample.code;
+package com.wei.code;
 
 /**
  * @author shuxin.wei

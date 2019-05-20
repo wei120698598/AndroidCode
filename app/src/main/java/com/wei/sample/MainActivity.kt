@@ -41,7 +41,7 @@ class MainActivity : ListActivity() {
             1 -> startActivity(Intent(this, RxJavaActivity::class.java))
             2 -> Toast.makeText(this, "root权限:" + checkRoot(), Toast.LENGTH_SHORT).show()
             3 -> startActivity(Intent(this, XposedActivity::class.java))
-            4 -> FloatToast(this)
+            4 -> startActivity(Intent(this, FloatButtonActivity::class.java))
             5 -> startActivity(Intent(this, RecyclerViewActivity::class.java))
             6 -> startActivity(Intent(this, CoordinatorLayoutActivity::class.java))
             7 -> startActivity(Intent(this, TaskActivity::class.java))

@@ -5,7 +5,10 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
+
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -42,6 +45,7 @@ public class FloatButtonActivity extends AppCompatActivity {
                 finish();
             }
         });
+        View inflate = LayoutInflater.from(this).inflate(R.layout.activity_main, null);
     }
 
     @Override
