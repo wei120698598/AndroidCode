@@ -264,7 +264,6 @@ public class SortCode {
     public static class MergeSort {
         public void mergeSort(int[] a) {
             System.out.println("归并排序前的数组为：" + Arrays.toString(a));
-            ;
             System.out.println("归并排序后的数组为：" + Arrays.toString(mergeSort(a, 0, 9)));
         }
 

@@ -8,6 +8,7 @@ package com.wei.sample.design;
  * @email weishuxin@icourt.cc
  */
 
+import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -70,7 +71,7 @@ public class CoordinatorLayoutActivity extends AppCompatActivity {
         //通过CollapsingToolbarLayout修改字体颜色
 //        mCollapsingToolbarLayout.setExpandedTitleColor(Color.WHITE);//设置还没收缩时状态下字体颜色
 //        mCollapsingToolbarLayout.setCollapsedTitleTextColor(Color.GREEN);//设置收缩后Toolbar上字体的颜色
-        RecyclerViewActivity.initRecyclerView((RecyclerView) findViewById(R.id.recyclerView));
+        RecyclerViewActivity.initRecyclerView(findViewById(R.id.recyclerView));
 
         Socket socket = new Socket();
     }
@@ -86,7 +87,7 @@ public class CoordinatorLayoutActivity extends AppCompatActivity {
         @Override
         public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
             super.onViewCreated(view, savedInstanceState);
-            RecyclerViewActivity.initRecyclerView((RecyclerView) view.findViewById(R.id.recyclerView));
+            RecyclerViewActivity.initRecyclerView(view.findViewById(R.id.recyclerView));
         }
     }
 
@@ -100,7 +101,7 @@ public class CoordinatorLayoutActivity extends AppCompatActivity {
         @Override
         public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
             super.onViewCreated(view, savedInstanceState);
-            RecyclerViewActivity.initRecyclerView((RecyclerView) view.findViewById(R.id.recyclerView));
+            RecyclerViewActivity.initRecyclerView(view.findViewById(R.id.recyclerView));
         }
     }
 

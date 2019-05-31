@@ -10,20 +10,18 @@ import androidx.multidex.MultiDexApplication;
  * @email weishuxin@icourt.cc
  */
 public class MyApplication extends MultiDexApplication {
-    private static MyApplication myApplication;
+    private static MyApplication instance;
 
+    public static MyApplication getInstance() {
+        if (instance == null) {
+            instance = new MyApplication();
+        }
+        return instance;
+    }
 
     @Override
     public void onCreate() {
         super.onCreate();
-        myApplication = this;
-//        SoLoader.init(this, false);
-    }
-
-    public static MyApplication getInstance() {
-        if (myApplication == null) {
-            myApplication = new MyApplication();
-        }
-        return myApplication;
+        instance = this;
     }
 }

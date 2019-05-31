@@ -43,6 +43,7 @@
             android:theme="@style/Theme.Design.Light.NoActionBar" />
         <activity android:name=".mvvm.TaskActivity" />
         <activity android:name=".thread.ThreadActivity" />
+        <activity android:name=".glide.GlideActivity" />
 
         <service android:name=".floatbtn.FloatWindowService" />
     </application>

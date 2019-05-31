@@ -83,9 +83,6 @@ public class SampleHeaderBehavior extends CoordinatorLayout.Behavior<TextView> {
             return false;
         }
 
-        if (downReach) {
-            return false;
-        }
-        return true;
+        return !downReach;
     }
 }

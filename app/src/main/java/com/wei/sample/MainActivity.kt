@@ -20,6 +20,7 @@ import java.io.BufferedReader
 import java.io.File
 import java.io.IOException
 import java.io.InputStreamReader
+import java.net.URI
 import java.util.*
 
 
@@ -29,10 +30,6 @@ class MainActivity : ListActivity() {
         super.onCreate(savedInstanceState)
         val itemList = Arrays.asList("Handler", "RxJava", "检查root", "Xposed", "悬浮窗", "RecyclerView","Coordinator","MVVM","ThreadTest")
         listAdapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1, itemList)
-    }
-
-    override fun onStart() {
-        super.onStart()
     }
 
     override fun onListItemClick(l: ListView?, v: View?, position: Int, id: Long) {
@@ -50,8 +47,8 @@ class MainActivity : ListActivity() {
     }
 
     private fun checkRoot(): Boolean {
-        val binPath = "/system/bin/su";
-        val xBinPath = "/system/xbin/su";
+        val binPath = "/system/bin/su"
+        val xBinPath = "/system/xbin/su"
         if (File(binPath).exists() && isCanExecute(binPath)) {
             return true
         }
@@ -73,7 +70,7 @@ class MainActivity : ListActivity() {
                     return true
             }
         } catch (e: IOException) {
-            e.printStackTrace();
+            e.printStackTrace()
         } finally {
             process?.destroy()
         }

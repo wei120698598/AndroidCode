@@ -143,7 +143,7 @@ public class MyWindowManager {
      */
     public static void updateUsedPercent(Context context) {
         if (smallWindow != null) {
-            TextView percentView = (TextView) smallWindow.findViewById(R.id.percent);
+            TextView percentView = smallWindow.findViewById(R.id.percent);
             percentView.setText(getUsedPercentValue(context));
         }
     }

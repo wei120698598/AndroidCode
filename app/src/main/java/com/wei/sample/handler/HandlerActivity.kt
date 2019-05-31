@@ -54,9 +54,6 @@ class HandlerActivity : Callback3, AppCompatActivity() {
                 println("shuxin.wei run:" + Thread.currentThread().name)
 
                 val handler = object : Handler() {
-                    override fun handleMessage(msg: Message?) {
-                        super.handleMessage(msg)
-                    }
                 }
 
                 handler.sendMessage(Message.obtain().apply {

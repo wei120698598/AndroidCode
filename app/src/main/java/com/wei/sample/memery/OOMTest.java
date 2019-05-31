@@ -1,10 +1,7 @@
 package com.wei.sample.memery;
 
-import com.squareup.haha.guava.collect.Maps;
-
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
@@ -19,7 +16,7 @@ import java.util.concurrent.Executors;
  */
 public class OOMTest {
     private ExecutorService executor = Executors.newSingleThreadExecutor();
-    private static Map<String, OOMTest> map = Maps.newHashMap();
+    private static Map<String, OOMTest> map = new HashMap<>();
 
     private void submitTask() {
         for (int i = 0; i < 10; i++) {

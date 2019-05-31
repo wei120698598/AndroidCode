@@ -27,7 +27,7 @@ public class FloatButtonActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_float);
-        Button startFloatWindow = (Button) findViewById(R.id.start_float_window);
+        Button startFloatWindow = findViewById(R.id.start_float_window);
         startFloatWindow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {

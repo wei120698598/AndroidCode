@@ -34,8 +34,8 @@ public class FloatWindowBigView extends LinearLayout {
         View view = findViewById(R.id.big_window_layout);
         viewWidth = view.getLayoutParams().width;
         viewHeight = view.getLayoutParams().height;
-        Button close = (Button) findViewById(R.id.close);
-        Button back = (Button) findViewById(R.id.back);
+        Button close = findViewById(R.id.close);
+        Button back = findViewById(R.id.back);
         close.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {

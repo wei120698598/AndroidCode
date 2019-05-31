@@ -46,7 +46,7 @@ public class RxJavaActivity extends RxAppCompatActivity {
             }
         });
         Observable.just("String")
-                .compose(this.<String>bindToLifecycle())
+                .compose(this.bindToLifecycle())
                 .delaySubscription(10000, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<String>() {
