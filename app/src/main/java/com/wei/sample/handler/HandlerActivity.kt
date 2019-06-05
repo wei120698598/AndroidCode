@@ -2,7 +2,9 @@ package com.wei.sample.handler
 
 import android.os.Bundle
 import android.os.Handler
+import android.os.Looper
 import android.os.Message
+import android.os.MessageQueue
 import androidx.appcompat.app.AppCompatActivity
 import android.view.ViewGroup
 import android.widget.TextView
@@ -34,34 +36,19 @@ class HandlerActivity : Callback3, AppCompatActivity() {
         textView?.text = "hhehhahha"
         setContentView(textView)
 
-        val callback: Callback3? = object : Callback3 {
-            override fun callback2(msg: String?) {
-
-            }
-
-            override fun callback(msg: String?) {
-                println("shuxin.wei callback:" + Thread.currentThread().name)
-                textView?.text = msg
+        val handler = object : Handler() {
+            override fun handleMessage(msg: Message?) {
+                println(msg?.obj.toString())
             }
         }
-
-
-        object : Thread() {
-            override fun run() {
-                if (callback != null) {
-                    callbackList.add(callback)
-                }
-                println("shuxin.wei run:" + Thread.currentThread().name)
-
-                val handler = object : Handler() {
-                }
-
-                handler.sendMessage(Message.obtain().apply {
-                    obj = ""
-                })
-
+        Thread(Runnable {
+            handler.sendMessage(handler.obtainMessage(1, "obtainMessage"))
+            Looper.myQueue().addIdleHandler {
+                println("lasjkfjalsdjflaj")
+                false
             }
-        }.start()
+        }).start()
+
     }
 }
 

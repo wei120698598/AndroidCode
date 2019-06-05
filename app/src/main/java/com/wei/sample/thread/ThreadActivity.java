@@ -1,6 +1,7 @@
 package com.wei.sample.thread;
 
 import android.app.Activity;
+import android.app.AppComponentFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.lang.reflect.Field;
 
@@ -19,7 +21,7 @@ import java.lang.reflect.Field;
  * @date 2019-05-14
  * @email weishuxin@icourt.cc
  */
-public class ThreadActivity extends Activity {
+public class ThreadActivity extends AppCompatActivity {
     private final Object lock = new Object();
 
     final Runnable runnable = new Runnable() {
@@ -28,7 +30,7 @@ public class ThreadActivity extends Activity {
            synchronized (lock){
                Log.i("shuxin.wei", "run: " + Thread.currentThread().getName());
                try {
-                   lock.wait();
+                   lock.wait(200);
                } catch (InterruptedException e) {
                    e.printStackTrace();
                }
