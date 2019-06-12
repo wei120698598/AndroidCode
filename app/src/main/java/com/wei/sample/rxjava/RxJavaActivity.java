@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.LifecycleOwner;
@@ -19,8 +18,11 @@ import org.jetbrains.annotations.NotNull;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
+import io.reactivex.ObservableSource;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
+import io.reactivex.functions.Function;
 
 /**
  * @author shuxin.wei
@@ -45,7 +47,13 @@ public class RxJavaActivity extends RxAppCompatActivity {
                 System.out.println("onDestroy1:" + event.name());
             }
         });
-        Observable.just("String")
+        Disposable disposable = Observable.just("String")
+                .flatMap(new Function<String, ObservableSource<String>>() {
+                    @Override
+                    public ObservableSource<String> apply(String s) throws Exception {
+                        return Observable.just(s);
+                    }
+                })
                 .compose(this.bindToLifecycle())
                 .delaySubscription(10000, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread())

@@ -42,7 +42,7 @@ class MainActivity : ListActivity() {
             5 -> startActivity(Intent(this, RecyclerViewActivity::class.java))
             6 -> startActivity(Intent(this, CoordinatorLayoutActivity::class.java))
             7 -> startActivity(Intent(this, TaskActivity::class.java))
-            8 -> startActivity(Intent(this, ThreadActivity::class.java))
+            8 -> startActivity(Intent(this, ThreadActivity::class.java)).let {  }
         }
     }
 
