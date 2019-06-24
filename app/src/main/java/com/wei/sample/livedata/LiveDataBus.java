@@ -17,6 +17,7 @@ import java.util.Map;
  * @version v1.0.0
  * @date 2019-06-24
  * @description https://tech.meituan.com/2018/07/26/android-livedatabus.html
+ * https://blog.csdn.net/mingyunxiaohai/article/details/89605994
  */
 public final class LiveDataBus {
 
@@ -121,33 +122,48 @@ public final class LiveDataBus {
          * 这样就会导致LiveDataBus每注册一个新的订阅者，这个订阅者立刻会收到一个回调，即使这个设置的动作发生在订阅之前。
          */
         private void hook(@NonNull Observer<? super T> observer) throws Exception {
-            //get wrapper's version
-            Class<LiveData> classLiveData = LiveData.class;
-            Field fieldObservers = classLiveData.getDeclaredField("mObservers");
-            fieldObservers.setAccessible(true);
-            Object objectObservers = fieldObservers.get(this);
+            //获取LiveData的class
+            Class<LiveData> liveDataClass = LiveData.class;
+            //反射回去LiveData的成员变量mObservers
+            Field fileObservers = liveDataClass.getDeclaredField("mObservers");
+            //设置该属性可更改
+            fileObservers.setAccessible(true);
+            //get方法获取的是当前对象的实例，这里就是mObservers这个Map集合
+            Object objectObservers = fileObservers.get(this);
+            //获取map对象的类
             Class<?> classObservers = objectObservers.getClass();
-
+            //获取集合的Map方法
             Method methodGet = classObservers.getDeclaredMethod("get", Object.class);
+            //设置get方法可以被访问
             methodGet.setAccessible(true);
+            //执行get方法拿出当前观察者对应的对象
             Object objectWrapperEntry = methodGet.invoke(objectObservers, observer);
+            //定义一个空对象
             Object objectWrapper = null;
+            //判断objectWrapperEntry是否是Map.Entry类型
             if (objectWrapperEntry instanceof Map.Entry) {
+                //如果是拿出他的值,其实就是LifecycleBoundObserver
                 objectWrapper = ((Map.Entry) objectWrapperEntry).getValue();
             }
+            //如果是空抛个异常
             if (objectWrapper == null) {
-                throw new NullPointerException("Wrapper can not be bull!");
+                throw new RuntimeException("objectWrapper is null");
             }
+            //因为mLastVersion在LifecycleBoundObserver的父类ObserverWrapper中，所以拿到它的父类
             Class<?> classObserverWrapper = objectWrapper.getClass().getSuperclass();
-
+            //获取到mLastVersion字段
             Field fieldLastVersion = classObserverWrapper.getDeclaredField("mLastVersion");
+            //设置该字段可以更改
             fieldLastVersion.setAccessible(true);
-            //get livedata's version
-            Field fieldVersion = classLiveData.getDeclaredField("mVersion");
-            fieldVersion.setAccessible(true);
-            Object objectVersion = fieldVersion.get(this);
-            //set wrapper's version
-            fieldLastVersion.set(objectWrapper, objectVersion);
+
+            //获取LiveData中的mVersion值
+            Field fileVersion = liveDataClass.getDeclaredField("mVersion");
+            //设置该值可以被访问
+            fileVersion.setAccessible(true);
+            //获取mVersion的值
+            Object objVersion = fileVersion.get(this);
+            //给mLastVersion赋值
+            fieldLastVersion.set(objectWrapper, objVersion);
         }
     }
 }
