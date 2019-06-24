@@ -1,21 +1,29 @@
 package com.wei.sample
 
 import android.app.ListActivity
+import android.content.BroadcastReceiver
+import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.ListView
 import android.widget.Toast
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.wei.sample.design.CoordinatorLayoutActivity
 import com.wei.sample.floatbtn.FloatButtonActivity
 import com.wei.sample.floatbtn.FloatToast
 import com.wei.sample.handler.HandlerActivity
 import com.wei.sample.mvvm.TaskActivity
+import com.wei.sample.recyclerview.AsyncListUtilActivity
 import com.wei.sample.recyclerview.RecyclerViewActivity
+import com.wei.sample.rxbus.RxBus2
 import com.wei.sample.rxjava.RxJavaActivity
 import com.wei.sample.thread.ThreadActivity
 import com.wei.sample.xposed.XposedActivity
+import io.reactivex.functions.Consumer
 import java.io.BufferedReader
 import java.io.File
 import java.io.IOException
@@ -28,8 +36,16 @@ class MainActivity : ListActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val itemList = Arrays.asList("Handler", "RxJava", "检查root", "Xposed", "悬浮窗", "RecyclerView","Coordinator","MVVM","ThreadTest")
+        val itemList = Arrays.asList("Handler", "RxJava", "检查root", "Xposed", "悬浮窗", "RecyclerView", "AsyncListUtilActivity", "Coordinator", "MVVM", "ThreadTest")
         listAdapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1, itemList)
+
+
+        RxBus2.getInstance().toObservable(String::class.java).subscribe(Consumer {
+            Log.i("shuxin.wei", it.toString())
+        })
+        RxBus2.getInstance().toObservable().subscribe(Consumer {
+            Log.i("shuxin.wei", "111" + it.toString())
+        })
     }
 
     override fun onListItemClick(l: ListView?, v: View?, position: Int, id: Long) {
@@ -40,9 +56,10 @@ class MainActivity : ListActivity() {
             3 -> startActivity(Intent(this, XposedActivity::class.java))
             4 -> startActivity(Intent(this, FloatButtonActivity::class.java))
             5 -> startActivity(Intent(this, RecyclerViewActivity::class.java))
-            6 -> startActivity(Intent(this, CoordinatorLayoutActivity::class.java))
-            7 -> startActivity(Intent(this, TaskActivity::class.java))
-            8 -> startActivity(Intent(this, ThreadActivity::class.java)).let {  }
+            6 -> startActivity(Intent(this, AsyncListUtilActivity::class.java))
+            7 -> startActivity(Intent(this, CoordinatorLayoutActivity::class.java))
+            8 -> startActivity(Intent(this, TaskActivity::class.java))
+            9 -> startActivity(Intent(this, ThreadActivity::class.java)).let { }
         }
     }
 

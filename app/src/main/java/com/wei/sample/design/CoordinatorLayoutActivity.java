@@ -28,6 +28,7 @@ import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.tabs.TabLayout;
 import com.wei.sample.R;
 import com.wei.sample.recyclerview.RecyclerViewActivity;
+import com.wei.sample.recyclerview.RecyclerViewActivityKt;
 
 import java.net.Socket;
 import java.util.Arrays;
@@ -71,7 +72,7 @@ public class CoordinatorLayoutActivity extends AppCompatActivity {
         //通过CollapsingToolbarLayout修改字体颜色
 //        mCollapsingToolbarLayout.setExpandedTitleColor(Color.WHITE);//设置还没收缩时状态下字体颜色
 //        mCollapsingToolbarLayout.setCollapsedTitleTextColor(Color.GREEN);//设置收缩后Toolbar上字体的颜色
-        RecyclerViewActivity.initRecyclerView(findViewById(R.id.recyclerView));
+        RecyclerViewActivityKt.initRecyclerView(findViewById(R.id.recyclerView));
 
         Socket socket = new Socket();
     }
@@ -87,7 +88,7 @@ public class CoordinatorLayoutActivity extends AppCompatActivity {
         @Override
         public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
             super.onViewCreated(view, savedInstanceState);
-            RecyclerViewActivity.initRecyclerView(view.findViewById(R.id.recyclerView));
+            RecyclerViewActivityKt.initRecyclerView(view.findViewById(R.id.recyclerView));
         }
     }
 
@@ -101,7 +102,7 @@ public class CoordinatorLayoutActivity extends AppCompatActivity {
         @Override
         public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
             super.onViewCreated(view, savedInstanceState);
-            RecyclerViewActivity.initRecyclerView(view.findViewById(R.id.recyclerView));
+            RecyclerViewActivityKt.initRecyclerView(view.findViewById(R.id.recyclerView));
         }
     }
 
