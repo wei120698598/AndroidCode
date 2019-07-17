@@ -41,7 +41,6 @@ public class Reflex implements Serializable {
                 field.set(o, "haha");
             }
 
-
             Method[] declaredMethods = Reflex.class.getDeclaredMethods();
             for (Method declaredMethod : declaredMethods) {
                 System.out.println("---------------------" + declaredMethod.getName() + "---------------------");

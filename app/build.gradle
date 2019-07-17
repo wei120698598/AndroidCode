@@ -75,24 +75,24 @@ android {
 
 dependencies {
     compileOnly fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.40'
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.41'
     testImplementation 'junit:junit:4.13-beta-3'
     // ------------- androidx -------------
     kapt 'androidx.room:room-compiler:2.1.0'
-    implementation 'androidx.appcompat:appcompat:1.1.0-beta01'
+    implementation 'androidx.appcompat:appcompat:1.1.0-rc01'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.0-beta2'
-    implementation 'androidx.recyclerview:recyclerview:1.1.0-alpha06'
+    implementation 'androidx.recyclerview:recyclerview:1.1.0-beta01'
     implementation 'androidx.core:core-ktx:1.2.0-alpha02'
-    implementation 'androidx.appcompat:appcompat:1.1.0-beta01'
+    implementation 'androidx.appcompat:appcompat:1.1.0-rc01'
     implementation "androidx.constraintlayout:constraintlayout:2.0.0-beta2"
     implementation 'androidx.core:core-ktx:1.2.0-alpha02'
-    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0-alpha01'
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0-alpha01"
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.1.0-alpha05'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.1.0-alpha05'
-    implementation "androidx.recyclerview:recyclerview:1.1.0-alpha06"
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0-alpha02'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0-alpha02'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.1.0-alpha06'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.1.0-alpha06'
+    implementation 'androidx.recyclerview:recyclerview:1.1.0-beta01'
     implementation "androidx.room:room-runtime:2.1.0"
-    implementation 'androidx.work:work-runtime-ktx:2.1.0-beta02'
+    implementation 'androidx.work:work-runtime-ktx:2.1.0'
 
     // CameraX core library.
 //    implementation "androidx.camera.core:core:+"
@@ -102,19 +102,19 @@ dependencies {
 //    implementation "androidx.camera.core:camera2:+"
 
     // ------------- Testing dependencies -------------
-    androidTestImplementation 'androidx.arch.core:core-testing:2.1.0-beta01'
-    androidTestImplementation 'androidx.test.espresso:espresso-contrib:3.2.0'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0-alpha01'
-    androidTestImplementation 'androidx.test.espresso:espresso-intents:3.2.0'
+    androidTestImplementation 'androidx.arch.core:core-testing:2.1.0-rc01'
+    androidTestImplementation 'androidx.test.espresso:espresso-contrib:3.3.0-alpha02'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0-alpha02'
+    androidTestImplementation 'androidx.test.espresso:espresso-intents:3.3.0-alpha02'
     androidTestImplementation "androidx.test.uiautomator:uiautomator:2.2.0"
     testImplementation 'junit:junit:4.13-beta-3'
 
-    implementation 'com.google.android.material:material:1.1.0-alpha07'
+    implementation 'com.google.android.material:material:1.1.0-alpha08'
 
 
     // ------------- RxAndroid -------------
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
-    implementation 'io.reactivex.rxjava2:rxjava:2.2.8'
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.10'
     implementation 'com.trello.rxlifecycle2:rxlifecycle:2.2.2'
     implementation 'com.trello.rxlifecycle2:rxlifecycle-android:2.2.2'
     implementation 'com.trello.rxlifecycle2:rxlifecycle-components:2.2.2'
@@ -124,7 +124,7 @@ dependencies {
     annotationProcessor 'com.alibaba:arouter-compiler:1.2.1'
 
     //-------------- 内存管理 -------------
-    implementation 'com.squareup.leakcanary:leakcanary-android:2.0-alpha-2'
+    implementation 'com.squareup.leakcanary:leakcanary-android:2.0-alpha-3'
     implementation "com.github.markzhai:blockcanary-android:1.5.0"
 
     // ------------- 图片加载 -------------
@@ -138,7 +138,7 @@ dependencies {
     implementation 'com.squareup.retrofit2:retrofit:2.6.0'
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.6.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.6.0'
-    implementation 'com.squareup.okhttp3:logging-interceptor:4.0.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.0.1'
 
     // ------------- hook框架 -------------
     compileOnly 'de.robv.android.xposed:api:82'
@@ -160,7 +160,7 @@ dependencies {
     implementation 'com.facebook.litho:litho-widget:0.25.0'
     kapt 'com.facebook.litho:litho-processor:0.25.0'
     // SoLoader
-    implementation 'com.facebook.soloader:soloader:0.6.0'
+    implementation 'com.facebook.soloader:soloader:0.6.1'
     // For integration with Fresco
     implementation 'com.facebook.litho:litho-fresco:0.25.0'
     // For testing

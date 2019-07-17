@@ -12,6 +12,7 @@ import android.widget.ArrayAdapter
 import android.widget.ListView
 import android.widget.Toast
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
+import com.wei.sample.coroutines.CoroutinesActivity
 import com.wei.sample.design.CoordinatorLayoutActivity
 import com.wei.sample.floatbtn.FloatButtonActivity
 import com.wei.sample.floatbtn.FloatToast
@@ -36,7 +37,9 @@ class MainActivity : ListActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val itemList = Arrays.asList("Handler", "RxJava", "检查root", "Xposed", "悬浮窗", "RecyclerView", "AsyncListUtilActivity", "Coordinator", "MVVM", "ThreadTest")
+        val itemList = Arrays.asList("Handler", "RxJava", "检查root", "Xposed", "悬浮窗", "RecyclerView",
+                "AsyncListUtilActivity", "Coordinator", "MVVM", "ThreadTest",
+                "协程")
         listAdapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1, itemList)
 
 
@@ -60,6 +63,7 @@ class MainActivity : ListActivity() {
             7 -> startActivity(Intent(this, CoordinatorLayoutActivity::class.java))
             8 -> startActivity(Intent(this, TaskActivity::class.java))
             9 -> startActivity(Intent(this, ThreadActivity::class.java)).let { }
+            10 -> startActivity(Intent(this, CoroutinesActivity::class.java)).let { }
         }
     }
 

@@ -60,5 +60,4 @@ public class Logger {
             System.out.println("shuxin.wei: " + content);
         }
     }
-
 }
