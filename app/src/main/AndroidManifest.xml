@@ -46,6 +46,7 @@
         <activity android:name=".glide.GlideActivity" />
         <activity android:name=".recyclerview.AsyncListUtilActivity" />
         <activity android:name=".coroutines.CoroutinesActivity" />
+        <activity android:name=".ue.UEActivity" />
 
         <service android:name=".floatbtn.FloatWindowService" />
     </application>

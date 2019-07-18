@@ -23,6 +23,7 @@ import com.wei.sample.recyclerview.RecyclerViewActivity
 import com.wei.sample.rxbus.RxBus2
 import com.wei.sample.rxjava.RxJavaActivity
 import com.wei.sample.thread.ThreadActivity
+import com.wei.sample.ue.UEActivity
 import com.wei.sample.xposed.XposedActivity
 import io.reactivex.functions.Consumer
 import java.io.BufferedReader
@@ -38,8 +39,7 @@ class MainActivity : ListActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val itemList = Arrays.asList("Handler", "RxJava", "检查root", "Xposed", "悬浮窗", "RecyclerView",
-                "AsyncListUtilActivity", "Coordinator", "MVVM", "ThreadTest",
-                "协程")
+                "AsyncListUtilActivity", "Coordinator", "MVVM", "ThreadTest", "协程", "UE")
         listAdapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1, itemList)
 
 
@@ -62,8 +62,9 @@ class MainActivity : ListActivity() {
             6 -> startActivity(Intent(this, AsyncListUtilActivity::class.java))
             7 -> startActivity(Intent(this, CoordinatorLayoutActivity::class.java))
             8 -> startActivity(Intent(this, TaskActivity::class.java))
-            9 -> startActivity(Intent(this, ThreadActivity::class.java)).let { }
-            10 -> startActivity(Intent(this, CoroutinesActivity::class.java)).let { }
+            9 -> startActivity(Intent(this, ThreadActivity::class.java))
+            10 -> startActivity(Intent(this, CoroutinesActivity::class.java))
+            11 -> startActivity(Intent(this, UEActivity::class.java))
         }
     }
 
