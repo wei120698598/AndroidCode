@@ -2,13 +2,22 @@ package com.wei.sample;
 
 import android.os.Looper;
 
-public abstract class TestHandlerThread {
+import org.junit.Test;
+
+import java.util.concurrent.Callable;
+
+import io.reactivex.Observable;
+import io.reactivex.ObservableSource;
+import io.reactivex.functions.BiConsumer;
+import io.reactivex.functions.Function;
+
+public class TestHandlerThread {
     private boolean mDone = false;
     private boolean mSuccess = false;
     private RuntimeException mFailure = null;
     private Looper mLooper;
 
-    public abstract void go();
+    public  void go(){};
 
     public TestHandlerThread() {
     }
@@ -81,5 +90,18 @@ public abstract class TestHandlerThread {
             mDone = true;
             notifyAll();
         }
+    }
+
+    @Test
+    public void testRX() {
+        Observable.just(true)
+                .mergeWith(Observable.just(true))
+                .concatMap(new Function<Boolean, ObservableSource<?>>() {
+                    @Override
+                    public ObservableSource<?> apply(Boolean aBoolean) throws Exception {
+                        return null;
+                    }
+                })
+                .subscribe();
     }
 }

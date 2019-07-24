@@ -82,4 +82,5 @@ public class RxJava {
 
         new Retrofit.Builder().addConverterFactory(GsonConverterFactory.create(new Gson()));
     }
+
 }

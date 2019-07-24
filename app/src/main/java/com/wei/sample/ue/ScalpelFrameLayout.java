@@ -20,6 +20,13 @@ import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.util.ArrayDeque;
 import java.util.BitSet;
 import java.util.Deque;
@@ -522,4 +529,42 @@ public class ScalpelFrameLayout extends FrameLayout {
 
         protected abstract T newObject();
     }
+
+    public static String execRootCmd(String cmd) {
+        String result = "";
+        BufferedWriter dos = null;
+        BufferedReader dis = null;
+
+        try {
+            Process p = Runtime.getRuntime().exec("su");// 经过Root处理的android系统即有su命令
+            dos = new BufferedWriter(new OutputStreamWriter(p.getOutputStream()));
+            dis = new BufferedReader(new InputStreamReader(p.getInputStream()));
+
+            String line = null;
+            while ((line = dis.readLine()) != null) {
+                Log.d("result", line);
+                result += line;
+            }
+            p.waitFor();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (dos != null) {
+                try {
+                    dos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (dis != null) {
+                try {
+                    dis.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return result;
+    }
+
 }

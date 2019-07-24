@@ -26,10 +26,7 @@ import com.wei.sample.thread.ThreadActivity
 import com.wei.sample.ue.UEActivity
 import com.wei.sample.xposed.XposedActivity
 import io.reactivex.functions.Consumer
-import java.io.BufferedReader
-import java.io.File
-import java.io.IOException
-import java.io.InputStreamReader
+import java.io.*
 import java.net.URI
 import java.util.*
 
@@ -39,7 +36,7 @@ class MainActivity : ListActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val itemList = Arrays.asList("Handler", "RxJava", "检查root", "Xposed", "悬浮窗", "RecyclerView",
-                "AsyncListUtilActivity", "Coordinator", "MVVM", "ThreadTest", "协程", "UE")
+                "AsyncListUtilActivity", "Coordinator", "MVVM", "ThreadTest", "协程", "UE", "Command")
         listAdapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1, itemList)
 
 
@@ -65,6 +62,13 @@ class MainActivity : ListActivity() {
             9 -> startActivity(Intent(this, ThreadActivity::class.java))
             10 -> startActivity(Intent(this, CoroutinesActivity::class.java))
             11 -> startActivity(Intent(this, UEActivity::class.java))
+
+            12 -> {
+                Thread {
+                    execute("su -V")
+                    execute("adb shell setprop debug.hwui.overdraw show")
+                }.start()
+            }
         }
     }
 
@@ -98,4 +102,51 @@ class MainActivity : ListActivity() {
         }
         return false
     }
+
+    private fun execute(command: String) {
+        var process: Process? = null
+        var bufferedReader: BufferedReader? = null
+        var errorBufferedReader: BufferedReader? = null
+        try {
+            process = Runtime.getRuntime().exec(command)
+            bufferedReader = BufferedReader(InputStreamReader(process.inputStream))
+            errorBufferedReader = BufferedReader(InputStreamReader(process.errorStream))
+
+            val os = DataOutputStream(process.outputStream)
+            os.writeBytes("$command\n")
+            os.writeBytes("exit\n")
+            os.flush()
+
+            val result = StringBuffer()
+            val error = StringBuffer()
+
+            while (true) {
+                val readLine = bufferedReader.readLine()
+                if (readLine != null) {
+                    result.append(readLine)
+                } else {
+                    break
+                }
+            }
+            while (true) {
+                val readLine = errorBufferedReader.readLine()
+                if (readLine != null) {
+                    error.append(readLine)
+                } else {
+                    break
+                }
+            }
+            println("shuxin.wei exec: $command")
+//            println("shuxin.wei result:${process.exitValue()}  $result")
+            println("shuxin.wei error: $error")
+            process.waitFor()
+        } catch (e: IOException) {
+            e.printStackTrace()
+        } finally {
+            bufferedReader?.close()
+            errorBufferedReader?.close()
+            process?.destroy()
+        }
+    }
+
 }

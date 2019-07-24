@@ -1,17 +1,22 @@
 package com.wei.sample.coroutines
 
+import android.app.Activity
 import android.app.ProgressDialog
+import android.content.Context
 import android.os.Bundle
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import com.wei.sample.R
+import com.wei.sample.utils.TAG
 import com.wei.sample.utils.logD
 import com.wei.sample.utils.logI
 import kotlinx.android.synthetic.main.activity_coroutines.*
 import kotlinx.coroutines.*
-import kotlinx.coroutines.channels.broadcast
 import org.jetbrains.anko.*
 import org.jetbrains.anko.doAsyncResult
+import org.jetbrains.anko.support.v4.runOnUiThread
+import org.jetbrains.anko.support.v4.supportFragmentUiThread
 import java.lang.Thread.currentThread
 import java.lang.ref.WeakReference
 import java.util.concurrent.Future
@@ -114,20 +119,46 @@ class CoroutinesActivity : AppCompatActivity() {
                 printThread("555")
             }
 
-            val doAsync = GlobalScope.doAsync {
-                printThread("333")
-                "1212"
+            val doAsync: Future<Unit> = "test".doAsync {
+                val get: String? = this.weakRef.get()
+                printThread(get ?: "test")
+                "test"
             }
 
-            val doAsyncResult = GlobalScope.doAsyncResult{
-                printThread("4444")
-                 "111"
+            val doAsyncResult: Future<String> = "test".doAsyncResult {
+                val get: String? = this.weakRef.get()
+                printThread(get ?: "")
+                return@doAsyncResult "test"
             }
 
-            AnkoAsyncContext(WeakReference(this@CoroutinesActivity)).activityUiThread {
+            val activityUiThread: Boolean = AnkoAsyncContext(WeakReference(this@CoroutinesActivity)).activityUiThread {
+            }
+
+            baseContext.runOnUiThread {
+            }
+
+            val uiThread: Boolean = AnkoAsyncContext(WeakReference("test")).uiThread {
+            }
+
+            val activityUiThreadWithContext: Boolean = AnkoAsyncContext(WeakReference(this@CoroutinesActivity)).activityUiThreadWithContext {
+            }
+
+
+            val ankoContext = AnkoContext.create(this@CoroutinesActivity, this@CoroutinesActivity)
+            val activityUiThread1: Boolean = AnkoAsyncContext(WeakReference(ankoContext)).activityUiThread {
+
+            }
+            val activityUiThreadWithContext1: Boolean = AnkoAsyncContext(WeakReference(ankoContext)).activityUiThreadWithContext {
 
             }
 
+            Fragment().runOnUiThread {
+
+            }
+
+            val supportFragmentUiThread:Boolean = AnkoAsyncContext(WeakReference(Fragment())).supportFragmentUiThread {
+
+            }
 
             CoroutineScope(Dispatchers.IO).launch {
 
@@ -153,8 +184,9 @@ class CoroutinesActivity : AppCompatActivity() {
     }
 }
 
+
 internal fun printThread(tag: String) {
-    "$tag: ThreadName:${currentThread().name} ThreadId: ${currentThread().id}".logD("shuxin.wei")
+    "$tag: ThreadName:${currentThread().name} ThreadId: ${currentThread().id}".logD(TAG)
 }
 
 suspend fun doSomethingUsefulOne(): Int {
