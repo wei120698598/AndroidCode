@@ -1,0 +1,208 @@
+allprojects {
+    repositories {
+        google()
+        jcenter()
+    }
+}
+
+/**
+ * ## 注意：库的别名以Compiler结尾的都是注解处理器，Kotlin工程要用kapt
+ */
+ext {
+    //Android
+    android = [
+            compileSdkVersion: 28,
+            minSdkVersion    : 19,
+            targetSdkVersion : 28,
+            versionCode      : 1,
+            versionName      : '1.0.0'
+    ]
+
+    //Kotlin
+    anko_version = '0.10.8'
+    kotlin_coroutines_version = '1.1.1'
+    kotlin = [
+            kotlin                 : "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version",
+            kotlinTest             : "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version",
+            kotlinCoroutines       : "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlin_coroutines_version",
+            kotlinCoroutinesAndroid: "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlin_coroutines_version",
+            kotlinAnko             : "org.jetbrains.anko:anko:$anko_version",
+    ]
+
+    //Androidx
+    androidx_core_version = '1.2.0-alpha02'
+    androidx_appcompat_version = '1.1.0-rc01'
+    androidx_recyclerview_version = '1.1.0-beta01'
+    androidx_constraintlayout_version = "2.0.0-beta2"
+    androidx_lifecycle_version = "2.2.0-alpha02"
+    androidx_navigation_version = "2.1.0-beta02"
+    androidx_work_version = "2.1.0-beta02"
+    androidx = [
+            core              : "androidx.core:core-ktx:$androidx_core_version",
+            appcompat         : "androidx.appcompat:appcompat:$androidx_appcompat_version",
+            recyclerview      : "androidx.recyclerview:recyclerview:$androidx_recyclerview_version",
+            constraintlayout  : "androidx.constraintlayout:constraintlayout:$androidx_constraintlayout_version",
+            lifecycle         : "androidx.lifecycle:lifecycle-extensions:$androidx_lifecycle_version",
+            viewmodel         : "androidx.lifecycle:lifecycle-viewmodel-ktx:$androidx_lifecycle_version",
+            navigationFragment: "androidx.navigation:navigation-fragment-ktx:$androidx_navigation_version",
+            navigationUI      : "androidx.navigation:navigation-ui-ktx:$androidx_navigation_version",
+            workManager       : "androidx.work:-runtime-ktx:$androidx_work_version",
+    ]
+
+    //MultiDex
+    multidex_version = '1.0.3'
+    multidex = [
+            multidex       : "com.android.support:multidex:$multidex_version",
+            multidexTesting: "com.android.support:multidex-instrumentation:$multidex_version",
+    ]
+
+    //EventBus
+    eventbus = [
+
+    ]
+
+    //room
+    room_version = "2.2.0-alpha01"
+    room = [
+            roomCore    : "androidx.room:room-ktx:$room_version",
+            roomRuntime : "androidx.room:room-runtime:$room_version",
+            roomRxjava2 : "androidx.room:room-rxjava2:$room_version",
+            roomGuava   : "androidx.room:room-guava:$room_version",
+            roomCompiler: "androidx.room:room-compiler:$room_version",
+            roomTesting : "androidx.room:room-testing:$room_version",
+    ]
+
+    //Network
+    retrofit_version = '2.6.0'
+    okhttp_version = '4.0.1'
+    network = [
+            retrofit          : "com.squareup.retrofit2:retrofit:$retrofit_version",
+            adapterRxjava2    : "com.squareup.retrofit2:adapter-rxjava2:$retrofit_version",
+            converterGson     : "com.squareup.retrofit2:converter-gson:$retrofit_version",
+            loggingInterceptor: "com.squareup.okhttp3:logging-interceptor:$okhttp_version",
+            okhttp            : "com.squareup.okhttp3:okhttp:$okhttp_version",
+    ]
+
+    //rx
+    rxjava_version = '2.2.10'
+    rxandroid_version = '2.1.1'
+    rxlifecycle_version = '2.2.2'
+    rx = [
+            rxjava              : "io.reactivex.rxjava2:rxjava:$rxjava_version",
+            rxandroid           : "io.reactivex.rxjava2:rxandroid:$rxandroid_version",
+            rxlifecycle         : "com.trello.rxlifecycle2:rxlifecycle:$rxlifecycle_version",
+            rxlifecycleAndroid  : "com.trello.rxlifecycle2:rxlifecycle-android:$rxlifecycle_version",
+            rxlifecycleComponent: "com.trello.rxlifecycle2:rxlifecycle-components:$rxlifecycle_version",
+    ]
+
+    //Image
+    glide_version = '4.9.0'
+    glide_okhttp_version = "4.3.1"
+    image = [
+            glide               : "com.github.bumptech.glide:glide:$glide_version",
+            glideCompiler       : "com.github.bumptech.glide:compiler:$glide_version",
+            glideOkhttp         : "com.github.bumptech.glide:okhttp3-integration:$glide_okhttp_version",
+            glideTransformations: "jp.wasabeef:glide-transformations:3.0.1"
+    ]
+
+    //Json
+    gson_version = '2.8.5'
+    json = [
+            gson: "com.google.code.gson:gson:$gson_version"
+    ]
+
+    //UI
+    ui = [
+            bdgeview: "q.rorbin:badgeview:1.1.0",
+    ]
+
+    //Inject
+    inject = [
+            javapoet : "com.squareup:javapoet:1.11.1",
+            aspectjrt: "org.aspectj:aspectjrt:1.9.4",
+    ]
+
+    //Analyze
+    leakcanary_version = "2.0-alpha-3"
+    blookcanary_version = "1.5.0"
+    analyze = [
+            leakcanary     : "com.squareup.leakcanary:leakcanary-android:$leakcanary_version",
+            leakcanarynoop : "com.squareup.leakcanary:leakcanary-android-no-op:$leakcanary_version",
+            blookcanary    : "com.github.markzhai:blockcanary-android:$blookcanary_version",
+            blockcanarynoop: "com.github.markzhai:blockcanary-no-op:$blookcanary_version",
+    ]
+
+    //Unit Testing
+    robolectric_version = '3.8'
+    junit_version = '4.12'
+    mockito_version = '1.4.0'
+    kluent_version = '1.14'
+    unitTesting = [
+            junit      : "junit:junit:$junit_version",
+            robolectric: "org.robolectric:robolectric:$robolectric_version",
+            mockito    : "com.nhaarman:mockito-kotlin:$mockito_version",
+            kluent     : "org.amshove.kluent:kluent:$kluent_version",
+    ]
+
+    //Acceptance Testing
+    test_core_version = '1.2.1-alpha02'
+    test_rules_version = '1.3.0-alpha02'
+    espresso_version = '3.3.0-alpha02'
+    acceptanceTesting = [
+            testCore       : "androidx.test:Core:$test_core_version",
+            testRules      : "androidx.test:rules:$test_rules_version",
+            testRunner     : "androidx.test:runner:$test_rules_version",
+            espressoCore   : "androidx.test.espresso:espresso-core:$espresso_version",
+            espressoIntents: "androidx.test.espresso:espresso-intents:$espresso_version",
+            espressoContrib: "androidx.test.espresso:espresso-contrib:$espresso_version",
+    ]
+
+//----------------------------------  常用依赖集合  ------------------------------------
+
+    //文件通用依赖，包含libs文件夹下的jar和aar、aar文件夹下的aar
+    fileTreeDependencies = [
+            fileTree([dir: 'libs', include: ['*.jar', '*.aar']]),
+            fileTree([dir: 'aar', include: ['*.aar']])
+    ]
+
+    //Kotlin 通用依赖，包含Kotlin Core，Kotlin协程，Kotlin扩展
+    kotlinDependencies = [
+            kotlin.kotlin,
+            kotlin.kotlinCoroutines,
+            kotlin.kotlinCoroutinesAndroid,
+            kotlin.kotlinAnko,
+    ]
+
+    //Androidx 通用依赖，包含AndroidSupport核心库，V7 AppCompat，生命周期管理，ViewModel，RecyclerView
+    androidxDependencies = [
+            androidx.core,
+            androidx.appcompat,
+            androidx.lifecycle,
+            androidx.viewmodel,
+            androidx.constraintlayout,
+            androidx.recyclerview,
+    ]
+
+    //网络组件相关依赖，包含Retrofit和OkHttp
+    networkDependencies = [
+            network.retrofit,
+            network.okhttp,
+            network.adapterRxjava2,
+            network.converterGson,
+            network.loggingInterceptor,
+    ]
+
+    //Android Test 通用依赖，espresso
+    androidTestDependencies = [
+            acceptanceTesting.testRunner,
+            acceptanceTesting.espressoCore,
+            acceptanceTesting.espressoIntents,
+            acceptanceTesting.espressoContrib,
+    ]
+    //Kotlin/Java Test 通用依赖 Junit
+    testDependencies = [
+            kotlin.kotlinTest,
+    ]
+}
+
+

@@ -113,7 +113,7 @@ public final class LiveDataBus {
         }
 
         /**
-         * 问题：我们发现，在使用这个LiveDataBus的过程中，订阅者会收到订阅之前发布的消息。
+         * 问题：在使用这个LiveDataBus的过程中，订阅者会收到订阅之前发布的消息。
          * 对于一个消息总线来说，这是不可接受的。无论EventBus或者RxBus，订阅方都不会收到订阅之前发出的消息。对于一个消息总线，LiveDataBus必须要解决这个问题。
          * <p>
          * 原因：当LifeCircleOwner的状态发生变化的时候，会调用LiveData.ObserverWrapper的activeStateChanged函数，如果这个时候ObserverWrapper的状态是active，就会调用LiveData的dispatchingValue，

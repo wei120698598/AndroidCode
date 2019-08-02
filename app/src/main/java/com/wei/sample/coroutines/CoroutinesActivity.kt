@@ -20,12 +20,14 @@ import org.jetbrains.anko.support.v4.supportFragmentUiThread
 import java.lang.Thread.currentThread
 import java.lang.ref.WeakReference
 import java.util.concurrent.Future
+import kotlin.coroutines.CoroutineContext
 
-class CoroutinesActivity : AppCompatActivity() {
+class CoroutinesActivity : AppCompatActivity(), CoroutineScope by CoroutineScope(Dispatchers.Main) {
     private val mainScope = MainScope()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_coroutines)
+
         button.setOnClickListener {
             //            Thread(Runnable {
 //                Thread.sleep(6000)
@@ -98,7 +100,7 @@ class CoroutinesActivity : AppCompatActivity() {
 
             val progressDialog = ProgressDialog(this@CoroutinesActivity)
 
-            GlobalScope.launch {
+            val launch:Job = GlobalScope.launch {
                 withContext(Dispatchers.Main) {
                     printThread("222")
                     progressDialog.show()
@@ -156,7 +158,7 @@ class CoroutinesActivity : AppCompatActivity() {
 
             }
 
-            val supportFragmentUiThread:Boolean = AnkoAsyncContext(WeakReference(Fragment())).supportFragmentUiThread {
+            val supportFragmentUiThread: Boolean = AnkoAsyncContext(WeakReference(Fragment())).supportFragmentUiThread {
 
             }
 
@@ -181,6 +183,7 @@ class CoroutinesActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
+        cancel()
     }
 }
 

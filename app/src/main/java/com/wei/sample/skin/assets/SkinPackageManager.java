@@ -4,10 +4,12 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
 import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.os.Environment;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.ViewTarget;
 import com.wei.sample.MyApplication;
 
 import java.io.File;
@@ -16,6 +18,7 @@ import java.util.concurrent.Callable;
 
 import io.reactivex.Observable;
 import io.reactivex.schedulers.Schedulers;
+import okhttp3.OkHttpClient;
 
 /**
  * 皮肤包管理器
@@ -60,7 +63,7 @@ public class SkinPackageManager {
      * 异步加载皮肤资源
      */
     public Observable<Boolean> loadSkinAsync() {
-        Glide.with(MyApplication.getInstance()).load("").into(new ImageView(MyApplication.getInstance()));
+        ViewTarget<ImageView, Drawable> target = Glide.with(MyApplication.getInstance()).load("").into(new ImageView(MyApplication.getInstance()));
 
         return Observable
                 .fromCallable(new Callable<Boolean>() {

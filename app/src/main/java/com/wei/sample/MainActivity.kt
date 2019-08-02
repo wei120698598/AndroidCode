@@ -31,6 +31,10 @@ import java.net.URI
 import java.util.*
 
 
+typealias Predicate<T> = (T) -> Boolean
+typealias rredicate =  MainActivity.() -> Boolean
+
+
 class MainActivity : ListActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,7 +50,10 @@ class MainActivity : ListActivity() {
         RxBus2.getInstance().toObservable().subscribe(Consumer {
             Log.i("shuxin.wei", "111" + it.toString())
         })
+
     }
+
+
 
     override fun onListItemClick(l: ListView?, v: View?, position: Int, id: Long) {
         when (position) {
@@ -64,12 +71,17 @@ class MainActivity : ListActivity() {
             11 -> startActivity(Intent(this, UEActivity::class.java))
 
             12 -> {
-                Thread {
+                val thread = Thread {
                     execute("su -V")
                     execute("adb shell setprop debug.hwui.overdraw show")
-                }.start()
+                }
             }
         }
+    }
+
+
+    fun copy(name: String): Thread {
+        return Thread()
     }
 
     private fun checkRoot(): Boolean {

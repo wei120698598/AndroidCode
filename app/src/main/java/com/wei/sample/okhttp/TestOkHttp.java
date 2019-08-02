@@ -59,7 +59,7 @@ public class TestOkHttp {
     }
 
     public OkHttpClient getHttpClient() {
-        return new OkHttpClient.Builder()
+        return new OkHttpClient.Builder(new OkHttpClient())
                 .addNetworkInterceptor(new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
                 .build();
     }
