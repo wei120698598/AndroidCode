@@ -1,4 +1,4 @@
-package com.zanfou.component.platform.client.error
+package com.zanfou.component.platform.client.exception
 
 /**
  * v1.0 of the file created on 2019-08-02 by shuxin.wei, email: weishuxin@maoyan.com

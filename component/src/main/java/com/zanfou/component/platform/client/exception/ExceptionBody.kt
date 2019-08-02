@@ -1,4 +1,4 @@
-package com.zanfou.component.platform.client.error
+package com.zanfou.component.platform.client.exception
 
 
 /**
@@ -9,12 +9,12 @@ package com.zanfou.component.platform.client.error
  * [message]中包含了错误信息，而[hitMessage]中包含了可以提示给用户的信息，[code]为异常码
  */
 
-class ErrorBody(
+class ExceptionBody(
     private var exception: Throwable? = null,
     private var message: String? = null,
     private var hitMessage: String? = null,
     private var code: Int? = null
-) : IErrorBody {
+) : IExceptionBody {
     override fun getException(): Throwable? {
         return exception
     }
@@ -33,7 +33,7 @@ class ErrorBody(
 }
 
 
-interface IErrorBody {
+interface IExceptionBody {
     fun getException(): Throwable?
 
     fun getHitMessage(): String?
