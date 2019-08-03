@@ -17,14 +17,14 @@ class HttpClientProvider private constructor() : IHttpClientProvider {
     }
 
     override fun getSampleHttpClient(okHttpClient: OkHttpClient?) =
-        HttpStore.defaultHttpClientStore.get(SimpleHttpFactory::class.java.name) ?: synchronized(simpleHttpClientLock) {
-            SimpleHttpFactory(true).create(okHttpClient)
-        }
+            HttpStore.defaultHttpClientStore.get(SimpleHttpFactory::class.java.name) ?: synchronized(simpleHttpClientLock) {
+                HttpStore.defaultHttpClientStore.put(SimpleHttpFactory::class.java.name, SimpleHttpFactory(true).create(okHttpClient))
+            }
 
     override fun getImageHttpClient(okHttpClient: OkHttpClient?) =
-        HttpStore.defaultHttpClientStore.get(ImageHttpFactory::class.java.name) ?: synchronized(imageHttpClientLock) {
-            ImageHttpFactory(true).create(okHttpClient)
-        }
+            HttpStore.defaultHttpClientStore.get(ImageHttpFactory::class.java.name) ?: synchronized(imageHttpClientLock) {
+                HttpStore.defaultHttpClientStore.put(ImageHttpFactory::class.java.name, ImageHttpFactory(true).create(okHttpClient))
+            }
 }
 
 interface IHttpClientProvider {

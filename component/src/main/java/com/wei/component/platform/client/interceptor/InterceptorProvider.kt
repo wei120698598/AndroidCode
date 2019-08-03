@@ -5,7 +5,7 @@ import okhttp3.Interceptor
 import okhttp3.logging.HttpLoggingInterceptor
 
 class InterceptorProvider private constructor(private val interceptorStore: HttpStore<String, Interceptor> = HttpStore.defaultInterceptorStore) :
-    IInterceptorProvider, HttpLoggingInterceptor.Logger {
+        IInterceptorProvider, HttpLoggingInterceptor.Logger {
     override fun log(message: String) {
 
     }

@@ -30,8 +30,6 @@ object Client {
      */
     var CACHE_SIZE = 10 * 1_024L * 1_024L
 
-    var IS_AUTH = true
-
     private val exceptions: MutableSet<(IExceptionBody)> = Collections.synchronizedSet(HashSet<(IExceptionBody)>())
 
 
