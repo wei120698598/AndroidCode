@@ -25,6 +25,7 @@ abstract class AuthInterceptor : Interceptor {
         val request = chain.request()
         if (!isTokenRefreshing) {
             val response = chain.proceed(request)
+            //没有报401 或者 不使用授权认证 ，直接返回Response
             if (response.code != 401 || request.header("auth")?.equals("true", true) == false) {
                 return response
             }
@@ -44,23 +45,25 @@ abstract class AuthInterceptor : Interceptor {
                     val tokenResponse = chain.refreshToken(refreshToken)
                     //如果刷新Token时又出现401，说明RefreshToken过期，需要清空Token，并重新登录
                     //如果能正常解析出来Token，那么就重新发起请求，如果不是401，并且没有解析成功，那么就返回默认的tokenResponse
-                    when {
-                        tokenResponse.code == 200 -> {
-                            val newToken = parseToken(tokenResponse) ?: return tokenResponse
-                            val newAccessToken = newToken.accessToken
-                            val newRefreshToken = newToken.refreshToken
-                            if (!newAccessToken.isNullOrBlank() && !newRefreshToken.isNullOrBlank()) {
-                                saveToken2DiskStore(newAccessToken, newRefreshToken)
-                            }
+                    if (tokenResponse.code == 200) {
+                        val newToken = parseToken(tokenResponse)
+                        if (newToken == null || newToken.accessToken.isNullOrBlank() || !newToken.refreshToken.isNullOrBlank()) {
+                            clearAccessToken()
+                            return tokenResponse
+                        } else {
+                            saveToken2DiskStore(newToken.accessToken!!, newToken.refreshToken!!)
                         }
-                        tokenResponse.code == 401 -> clearTokenOfDiskStore()
-                        else -> return tokenResponse
+                    } else {
+                        clearAccessToken()
+                        if (tokenResponse.code == 401) clearRefreshToken()
+                        return tokenResponse
                     }
                 } finally {
                     isTokenRefreshing = false
                 }
             }
         }
+
         //重新设置accessToken发起请求
         val accessToken = getAccessToken()
         if (!isTokenRefreshing && !accessToken.isNullOrBlank()) {
@@ -121,10 +124,19 @@ abstract class AuthInterceptor : Interceptor {
         }
     }
 
-    private fun clearTokenOfDiskStore() {
+    private fun clearAccessTokenOfDiskStore() {
         try {
             writeLock.lock()
-            clearToken()
+            clearAccessToken()
+        } finally {
+            writeLock.unlock()
+        }
+    }
+
+    private fun clearRefreshTokenOfDiskStore() {
+        try {
+            writeLock.lock()
+            clearRefreshToken()
         } finally {
             writeLock.unlock()
         }
@@ -144,7 +156,9 @@ abstract class AuthInterceptor : Interceptor {
     /**
      * 清除[Token]
      */
-    abstract fun clearToken(): Boolean
+    abstract fun clearAccessToken(): Boolean
+
+    abstract fun clearRefreshToken(): Boolean
 
     /**
      * 保存[Token]
