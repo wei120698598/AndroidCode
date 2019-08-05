@@ -23,10 +23,13 @@ abstract class AuthInterceptor : Interceptor {
 
     override fun intercept(chain: Interceptor.Chain): Response {
         val request = chain.request()
+        if (request.header("auth")?.equals("true", true) == false) {
+            return chain.proceed(request)
+        }
         if (!isTokenRefreshing) {
             val response = chain.proceed(request)
             //没有报401 或者 不使用授权认证 ，直接返回Response
-            if (response.code != 401 || request.header("auth")?.equals("true", true) == false) {
+            if (response.code != 401) {
                 return response
             }
         }
